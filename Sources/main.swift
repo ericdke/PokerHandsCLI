@@ -31,28 +31,48 @@ func endOfHand(people: DealerAndPlayers) {
     }
 }
 
+print("")
+
+var (player1, player2) = (Player(name: name1), Player(name: name2)) // just because print, will remove
+guard let player1Name = player1.name, player2Name = player2.name else {
+	fatalError()
+}
 
 for _ in 1...10 { // Can't wait for GCD... :(
 	var dealer = Dealer(deck: deck, evaluator: eval)
-	var (player1, player2) = (Player(name: name1), Player(name: name2))
+	(player1, player2) = (Player(name: name1), Player(name: name2))
 
 	if gameMode == .Random {
 	    dealer.dealHoldemHandTo(&player1)
 	    dealer.dealHoldemHandTo(&player2)
 	}
 
-	
+	print("\(player1Name) cards: \(player1.holeCards)")
+	print("\(player2Name) cards: \(player2.holeCards)")
 	
 	dealer.dealFlop()
 	dealer.dealTurn()
 	dealer.dealRiver()
+
+	print("Table cards: \(dealer.table.currentGame)")
+
 	dealer.evaluateHoldemHandAtRiverFor(&player1)
 	dealer.evaluateHoldemHandAtRiverFor(&player2)
 	dealer.updateHeadsUpWinner(player1: player1, player2: player2)
+
+	guard let winner = dealer.currentHandWinner, 
+		winnerName = winner.name, 
+		winnerHand = winner.holdemHandDescription, 
+		winnerHandName = winner.holdemHandNameDescription 
+		else {
+		fatalError()
+	}
+
+	print("\nWinner is \(winnerName) with \(winnerHand) (\(winnerHandName))\n")
 
 	results.append((dealer, player1, player2))
 	endOfHand((dealer, player1, player2))
 }
 
-print("Player 1 score: \(player1Score)") 
-print("Player 2 score: \(player2Score)") 
+print("\(player1Name) score: \(player1Score)") 
+print("\(player2Name) score: \(player2Score)\n") 
