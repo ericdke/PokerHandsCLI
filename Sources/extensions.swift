@@ -1,10 +1,16 @@
-import Foundation
-
 #if os(Linux) 
     import Glibc 
 #else 
-    import Darwin.C 
+    // import Darwin.C 
+    import Foundation
 #endif
+
+// TODO: find a way to generate a GOOD random number without killing the CPU
+// This function is kind of slow + very *pseudo* random. Bleh.
+func getPseudoRandomNumber(max:Int) -> Int {
+    srandom(UInt32(time(nil)))
+    return Int(random() % max)
+}
 
 public func ==(lhs: Card, rhs: Card) -> Bool {
     if lhs.rank == rhs.rank && lhs.suit == rhs.suit {
@@ -20,7 +26,8 @@ public extension MutableCollectionType where Index == Int {
         for i in 0..<count - 1 {
             let j:Int
             #if os(Linux) 
-                j = Int(random() % (count - i)) + i
+                // TODO: find a better way
+                j = getPseudoRandomNumber(count - i) + i
             #else
                 j = Int(arc4random_uniform(UInt32(count - i))) + i
             #endif
@@ -126,7 +133,8 @@ public extension Array {
     public mutating func takeOne() -> Element {
         let index:Int
         #if os(Linux) 
-            index = Int(random() % self.count)
+            // TODO: find a better way
+            index = getPseudoRandomNumber(self.count)
         #else
             index = Int(arc4random_uniform(UInt32(self.count)))
         #endif

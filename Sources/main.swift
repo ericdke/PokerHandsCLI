@@ -16,7 +16,6 @@ let name1 = "John"
 let name2 = "Jane"
 
 let eval = Evaluator()
-let deck = Deck()
 
 var player1Score = 0
 var player2Score = 0
@@ -38,8 +37,8 @@ guard let player1Name = player1.name, player2Name = player2.name else {
 	fatalError()
 }
 
-for _ in 1...10 { // Can't wait for GCD... :(
-	var dealer = Dealer(deck: deck, evaluator: eval)
+for _ in 1...100 { // Can't wait for GCD in Linux... :(
+	var dealer = Dealer(deck: Deck(), evaluator: eval)
 	(player1, player2) = (Player(name: name1), Player(name: name2))
 
 	if gameMode == .Random {
@@ -60,11 +59,21 @@ for _ in 1...10 { // Can't wait for GCD... :(
 	dealer.evaluateHoldemHandAtRiverFor(&player2)
 	dealer.updateHeadsUpWinner(player1: player1, player2: player2)
 
-	guard let winner = dealer.currentHandWinner, 
-		winnerName = winner.name, 
-		winnerHand = winner.holdemHandDescription, 
-		winnerHandName = winner.holdemHandNameDescription 
-		else {
+	guard let winner = dealer.currentHandWinner else {
+		print("No winner.")
+		fatalError()
+	}
+
+	guard let winnerName = winner.name else { 
+		print("No winner name.")
+		fatalError()
+	}
+	guard let winnerHand = winner.holdemHandDescription else { 
+		print("No winner hand description.")
+		fatalError()
+	}
+	guard let winnerHandName = winner.holdemHandNameDescription else { 
+		print("No winner hand name description.")
 		fatalError()
 	}
 
