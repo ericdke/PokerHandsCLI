@@ -1,0 +1,17 @@
+version: "Apple Swift version 2.2-dev (LLVM 46be9ff861, Clang 4deb154edc, Swift 778f82939c)"
+options: "492138b8a8fddc322b4530995e0f16e2"
+build_time: [503185690, 546484000]
+inputs:
+  "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/Sources/card.swift": [503184503, 0]
+  "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/Sources/combinationToRank.swift": [503184503, 0]
+  "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/Sources/dealer.swift": [503184503, 0]
+  "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/Sources/deck.swift": [503184503, 0]
+  "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/Sources/evaluator.swift": [503184503, 0]
+  "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/Sources/extensions.swift": [503184503, 0]
+  "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/Sources/flushes.swift": [503184503, 0]
+  "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/Sources/gameController.swift": [503185684, 0]
+  "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/Sources/main.swift": [503185522, 0]
+  "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/Sources/player.swift": [503184503, 0]
+  "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/Sources/primeProductToCombination.swift": [503184503, 0]
+  "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/Sources/table.swift": [503184503, 0]
+  "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/Sources/uniqueToRanks.swift": [503184503, 0]

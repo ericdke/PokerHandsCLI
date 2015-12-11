@@ -1,0 +1,83 @@
+{
+  "": {
+    "swift-dependencies": "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/.build/debug/SwiftyPokerHandsCLI.o/SwiftyPokerHandsCLI/master.swiftdeps"
+  },
+  "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/Sources/card.swift": {
+    "dependencies": "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/.build/debug/SwiftyPokerHandsCLI.o/SwiftyPokerHandsCLI/card.d",
+    "object": "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/.build/debug/SwiftyPokerHandsCLI.o/Sources/card.swift.o",
+    "swiftmodule": "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/.build/debug/SwiftyPokerHandsCLI.o/SwiftyPokerHandsCLI/card~partial.swiftmodule",
+    "swift-dependencies": "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/.build/debug/SwiftyPokerHandsCLI.o/SwiftyPokerHandsCLI/card.swiftdeps"
+  },
+  "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/Sources/combinationToRank.swift": {
+    "dependencies": "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/.build/debug/SwiftyPokerHandsCLI.o/SwiftyPokerHandsCLI/combinationToRank.d",
+    "object": "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/.build/debug/SwiftyPokerHandsCLI.o/Sources/combinationToRank.swift.o",
+    "swiftmodule": "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/.build/debug/SwiftyPokerHandsCLI.o/SwiftyPokerHandsCLI/combinationToRank~partial.swiftmodule",
+    "swift-dependencies": "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/.build/debug/SwiftyPokerHandsCLI.o/SwiftyPokerHandsCLI/combinationToRank.swiftdeps"
+  },
+  "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/Sources/dealer.swift": {
+    "dependencies": "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/.build/debug/SwiftyPokerHandsCLI.o/SwiftyPokerHandsCLI/dealer.d",
+    "object": "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/.build/debug/SwiftyPokerHandsCLI.o/Sources/dealer.swift.o",
+    "swiftmodule": "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/.build/debug/SwiftyPokerHandsCLI.o/SwiftyPokerHandsCLI/dealer~partial.swiftmodule",
+    "swift-dependencies": "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/.build/debug/SwiftyPokerHandsCLI.o/SwiftyPokerHandsCLI/dealer.swiftdeps"
+  },
+  "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/Sources/deck.swift": {
+    "dependencies": "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/.build/debug/SwiftyPokerHandsCLI.o/SwiftyPokerHandsCLI/deck.d",
+    "object": "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/.build/debug/SwiftyPokerHandsCLI.o/Sources/deck.swift.o",
+    "swiftmodule": "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/.build/debug/SwiftyPokerHandsCLI.o/SwiftyPokerHandsCLI/deck~partial.swiftmodule",
+    "swift-dependencies": "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/.build/debug/SwiftyPokerHandsCLI.o/SwiftyPokerHandsCLI/deck.swiftdeps"
+  },
+  "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/Sources/evaluator.swift": {
+    "dependencies": "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/.build/debug/SwiftyPokerHandsCLI.o/SwiftyPokerHandsCLI/evaluator.d",
+    "object": "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/.build/debug/SwiftyPokerHandsCLI.o/Sources/evaluator.swift.o",
+    "swiftmodule": "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/.build/debug/SwiftyPokerHandsCLI.o/SwiftyPokerHandsCLI/evaluator~partial.swiftmodule",
+    "swift-dependencies": "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/.build/debug/SwiftyPokerHandsCLI.o/SwiftyPokerHandsCLI/evaluator.swiftdeps"
+  },
+  "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/Sources/extensions.swift": {
+    "dependencies": "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/.build/debug/SwiftyPokerHandsCLI.o/SwiftyPokerHandsCLI/extensions.d",
+    "object": "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/.build/debug/SwiftyPokerHandsCLI.o/Sources/extensions.swift.o",
+    "swiftmodule": "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/.build/debug/SwiftyPokerHandsCLI.o/SwiftyPokerHandsCLI/extensions~partial.swiftmodule",
+    "swift-dependencies": "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/.build/debug/SwiftyPokerHandsCLI.o/SwiftyPokerHandsCLI/extensions.swiftdeps"
+  },
+  "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/Sources/flushes.swift": {
+    "dependencies": "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/.build/debug/SwiftyPokerHandsCLI.o/SwiftyPokerHandsCLI/flushes.d",
+    "object": "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/.build/debug/SwiftyPokerHandsCLI.o/Sources/flushes.swift.o",
+    "swiftmodule": "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/.build/debug/SwiftyPokerHandsCLI.o/SwiftyPokerHandsCLI/flushes~partial.swiftmodule",
+    "swift-dependencies": "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/.build/debug/SwiftyPokerHandsCLI.o/SwiftyPokerHandsCLI/flushes.swiftdeps"
+  },
+  "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/Sources/gameController.swift": {
+    "dependencies": "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/.build/debug/SwiftyPokerHandsCLI.o/SwiftyPokerHandsCLI/gameController.d",
+    "object": "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/.build/debug/SwiftyPokerHandsCLI.o/Sources/gameController.swift.o",
+    "swiftmodule": "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/.build/debug/SwiftyPokerHandsCLI.o/SwiftyPokerHandsCLI/gameController~partial.swiftmodule",
+    "swift-dependencies": "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/.build/debug/SwiftyPokerHandsCLI.o/SwiftyPokerHandsCLI/gameController.swiftdeps"
+  },
+  "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/Sources/main.swift": {
+    "dependencies": "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/.build/debug/SwiftyPokerHandsCLI.o/SwiftyPokerHandsCLI/main.d",
+    "object": "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/.build/debug/SwiftyPokerHandsCLI.o/Sources/main.swift.o",
+    "swiftmodule": "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/.build/debug/SwiftyPokerHandsCLI.o/SwiftyPokerHandsCLI/main~partial.swiftmodule",
+    "swift-dependencies": "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/.build/debug/SwiftyPokerHandsCLI.o/SwiftyPokerHandsCLI/main.swiftdeps"
+  },
+  "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/Sources/player.swift": {
+    "dependencies": "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/.build/debug/SwiftyPokerHandsCLI.o/SwiftyPokerHandsCLI/player.d",
+    "object": "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/.build/debug/SwiftyPokerHandsCLI.o/Sources/player.swift.o",
+    "swiftmodule": "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/.build/debug/SwiftyPokerHandsCLI.o/SwiftyPokerHandsCLI/player~partial.swiftmodule",
+    "swift-dependencies": "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/.build/debug/SwiftyPokerHandsCLI.o/SwiftyPokerHandsCLI/player.swiftdeps"
+  },
+  "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/Sources/primeProductToCombination.swift": {
+    "dependencies": "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/.build/debug/SwiftyPokerHandsCLI.o/SwiftyPokerHandsCLI/primeProductToCombination.d",
+    "object": "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/.build/debug/SwiftyPokerHandsCLI.o/Sources/primeProductToCombination.swift.o",
+    "swiftmodule": "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/.build/debug/SwiftyPokerHandsCLI.o/SwiftyPokerHandsCLI/primeProductToCombination~partial.swiftmodule",
+    "swift-dependencies": "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/.build/debug/SwiftyPokerHandsCLI.o/SwiftyPokerHandsCLI/primeProductToCombination.swiftdeps"
+  },
+  "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/Sources/table.swift": {
+    "dependencies": "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/.build/debug/SwiftyPokerHandsCLI.o/SwiftyPokerHandsCLI/table.d",
+    "object": "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/.build/debug/SwiftyPokerHandsCLI.o/Sources/table.swift.o",
+    "swiftmodule": "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/.build/debug/SwiftyPokerHandsCLI.o/SwiftyPokerHandsCLI/table~partial.swiftmodule",
+    "swift-dependencies": "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/.build/debug/SwiftyPokerHandsCLI.o/SwiftyPokerHandsCLI/table.swiftdeps"
+  },
+  "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/Sources/uniqueToRanks.swift": {
+    "dependencies": "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/.build/debug/SwiftyPokerHandsCLI.o/SwiftyPokerHandsCLI/uniqueToRanks.d",
+    "object": "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/.build/debug/SwiftyPokerHandsCLI.o/Sources/uniqueToRanks.swift.o",
+    "swiftmodule": "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/.build/debug/SwiftyPokerHandsCLI.o/SwiftyPokerHandsCLI/uniqueToRanks~partial.swiftmodule",
+    "swift-dependencies": "/Users/ericdejonckheere/Dropbox/Sandbox/SwiftyPokerHandsCLI/.build/debug/SwiftyPokerHandsCLI.o/SwiftyPokerHandsCLI/uniqueToRanks.swiftdeps"
+  }
+}
