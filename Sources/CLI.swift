@@ -1,5 +1,6 @@
 enum Errors: ErrorType {
 	case NoCommand
+	case InvalidCommand
 	case NoArguments
 	case InvalidArguments
 }
@@ -36,6 +37,8 @@ class CLI {
 					throw Errors.InvalidArguments
 				}
 				game = GameController(player1Name: input[0], player2Name: input[1])
+			} else {
+				throw Errors.InvalidCommand
 			}
 		} else {
 			game = GameController()
