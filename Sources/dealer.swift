@@ -66,6 +66,10 @@ public struct Dealer: SPHCardsDebug {
         currentDeck.shuffle()
     }
 
+    public mutating func removeCards(inout player: Player) {
+        player.cards = []
+    }
+
     public mutating func deal(numberOfCards: Int) -> [Card] {
         return currentDeck.takeCards(numberOfCards)
     }

@@ -31,13 +31,15 @@ public struct Player: CanTakeCard {
 
     public var cards = [Card]() {
         didSet {
-            let tu = (self.cards[0], self.cards[1], NSDate())
-            historyOfDealtHoldemCards.append(tu)
-            let fqname = "\(tu.0.description),\(tu.1.description)"
-            if frequentHands[fqname] == nil {
-                frequentHands[fqname] = 1
-            } else {
-                frequentHands[fqname]!++
+            if self.cards.count > 1 {
+                let tu = (self.cards[0], self.cards[1], NSDate())
+                historyOfDealtHoldemCards.append(tu)
+                let fqname = "\(tu.0.description),\(tu.1.description)"
+                if frequentHands[fqname] == nil {
+                    frequentHands[fqname] = 1
+                } else {
+                    frequentHands[fqname]!++
+                }
             }
         }
     }

@@ -1,4 +1,6 @@
-import Dispatch
+#if os(OSX)
+	import Dispatch
+#endif
 
 class GameController {
 
@@ -36,21 +38,20 @@ class GameController {
 		self.gameMode = mode
 	}
 
-	func startGame() {
+	func startGame(loops: Int) {
 		#if os(Linux)
-			gameLinux()
+			gameLinux(loops)
 		#else
-			gameOSX()
+			gameOSX(loops)
 		#endif
 	}
 
-	func gameLinux() {
-		var (player1, player2): (Player, Player)
-		let deck = Deck()
-		for _ in 1...100 { // Can't wait for GCD in Swift.org :(
-			var dealer = Dealer(deck: deck, evaluator: eval)
-			(player1, player2) = (Player(name: player1Name), Player(name: player2Name))
-
+	func gameLinux(loops: Int) {
+		// var (player1, player2): (Player, Player)
+		var player1 = Player(name: player1Name)
+		var player2 = Player(name: player2Name)
+		var dealer = Dealer(deck: Deck(), evaluator: eval)
+		for _ in 1...loops { // Can't wait for GCD in Swift.org :(
 			if gameMode == .Random {
 			    dealer.dealHoldemHandTo(&player1)
 			    dealer.dealHoldemHandTo(&player2)
@@ -85,14 +86,21 @@ class GameController {
 
 			results.append((dealer, player1, player2))
 			endOfHand((dealer, player1, player2))
+
+			// TODO: when multithread is implemented, do not use this mutable way anymore
+			// Create new dealer and players each loop instead
+			// Or implement locks, but... no.
+			dealer.changeDeck()
+			dealer.removeCards(&player1)
+			dealer.removeCards(&player2)
 		}
 
 		print("\(player1Name) score: \(player1Score)") 
 		print("\(player2Name) score: \(player2Score)\n") 
 	}
 
-	func gameOSX() {
-		gameLinux()  // Can't wait for GCD in Swift.org :(
+	func gameOSX(loops: Int) {
+		gameLinux(loops)  // Looks like GCD is not implemented yet in Swift.org even on OS X, shadowing for now
 
 		// let q1 = dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0)
 		// let q2 = dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)
