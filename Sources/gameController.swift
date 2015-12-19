@@ -26,6 +26,8 @@ class GameController {
 	
 	var player2Score = 0
 
+	var loops = 100
+
 	private let eval = Evaluator()
 
 	init(mode: GameMode = .Random) {
@@ -38,7 +40,7 @@ class GameController {
 		self.gameMode = mode
 	}
 
-	func startGame(loops: Int) {
+	func startGame() {
 		#if os(Linux)
 			gameLinux(loops)
 		#else
@@ -95,7 +97,7 @@ class GameController {
 			dealer.removeCards(&player2)
 		}
 
-		print("\(player1Name) score: \(player1Score)") 
+		print("\n\(player1Name) score: \(player1Score)") 
 		print("\(player2Name) score: \(player2Score)\n") 
 	}
 
@@ -155,9 +157,9 @@ class GameController {
 	private func endOfHand(people: DealerAndPlayers) {
 	    for (name, value) in people.dealer.scores {
 	        if name == player1Name {
-	            player1Score += value
+	            player1Score = value
 	        } else if name == player2Name {
-	            player2Score += value
+	            player2Score = value
 	        }
 	    }
 	}
