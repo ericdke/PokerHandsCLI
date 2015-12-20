@@ -1,4 +1,8 @@
-import Foundation
+#if os(OSX) 
+    import Foundation
+#else 
+    import Glibc
+#endif
 
 enum Errors: ErrorType {
 	case NoCommand
