@@ -14,24 +14,28 @@ public struct Dealer: SPHCardsDebug {
         currentDeck = Deck()
         table = Table()
         evaluator = Evaluator()
+        srandom(UInt32(time(nil)))
     }
     
     public init(deck: Deck) {
         currentDeck = deck
         table = Table()
         evaluator = Evaluator()
+        srandom(UInt32(time(nil)))
     }
     
     public init(evaluator: Evaluator) {
         currentDeck = Deck()
         table = Table()
         self.evaluator = evaluator
+        srandom(UInt32(time(nil)))
     }
     
     public init(deck: Deck, evaluator: Evaluator) {
         currentDeck = deck
         table = Table()
         self.evaluator = evaluator
+        srandom(UInt32(time(nil)))
     }
 
     public var currentGame: String { return table.currentGame }

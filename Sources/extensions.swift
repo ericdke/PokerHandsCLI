@@ -1,14 +1,12 @@
 #if os(Linux) 
-    import Glibc 
+    import Glibc
 #else 
-    // import Darwin.C 
     import Foundation
 #endif
 
 // TODO: find a way to generate a GOOD random number without killing the CPU
-// This function is kind of slow + very *pseudo* random. Bleh.
+// This function is very *pseudo* random. Bleh.
 func getPseudoRandomNumber(max:Int) -> Int {
-    srandom(UInt32(time(nil)))
     return Int(random() % max)
 }
 
@@ -26,7 +24,6 @@ public extension MutableCollectionType where Index == Int {
         for i in 0..<count - 1 {
             let j:Int
             #if os(Linux) 
-                // TODO: find a better way
                 j = getPseudoRandomNumber(count - i) + i
             #else
                 j = Int(arc4random_uniform(UInt32(count - i))) + i
