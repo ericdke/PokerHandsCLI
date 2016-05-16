@@ -56,7 +56,7 @@ public struct Dealer: SPHCardsDebug {
                 if scores[currentHandWinner!.name!] == nil {
                     scores[currentHandWinner!.name!] = 1
                 } else {
-                    scores[currentHandWinner!.name!]!++
+                    scores[currentHandWinner!.name!]! += 1
                 }
             } else {
                 scores = [:]
@@ -74,24 +74,24 @@ public struct Dealer: SPHCardsDebug {
         currentDeck.shuffle()
     }
 
-    public mutating func removeCards(inout player: Player) {
+    public mutating func removeCards(player: inout Player) {
         player.cards = []
     }
 
     public mutating func deal(numberOfCards: Int) -> [Card] {
-        return currentDeck.takeCards(numberOfCards)
+        return currentDeck.takeCards(number: numberOfCards)
     }
 
     public mutating func dealHoldemHand() -> [Card] {
-        return deal(2)
+        return deal(numberOfCards: 2)
     }
 
-    public mutating func dealHoldemHandTo(inout player: Player) {
+    public mutating func dealHoldemHandTo(player: inout Player) {
         player.cards = dealHoldemHand()
     }
     
     public mutating func dealHoldemCards(cards: [String]) -> [Card] {
-        let upCardChars = cards.map({$0.uppercaseString.characters.map({String($0)})})
+        let upCardChars = cards.map({$0.uppercased().characters.map({String($0)})})
         var cardsToDeal = [Card]()
         for cardChars in upCardChars {
             let cardObj = Card(suit: cardChars[1], rank: cardChars[0])
@@ -105,11 +105,11 @@ public struct Dealer: SPHCardsDebug {
         return cardsToDeal
     }
     
-    public mutating func dealHoldemCardsTo(inout player: Player, cards: [String]) {
+    public mutating func dealHoldemCardsTo(player: inout Player, cards: [String]) {
         player.cards = dealHoldemCards(cards)
     }
     
-    public mutating func dealHoldemCardsTo(inout player: Player, cards: [Card]) {
+    public mutating func dealHoldemCardsTo(player: inout Player, cards: [Card]) {
         var cardsToDeal = [Card]()
         for card in cards {
             guard let indexToRemove = currentDeck.cards.indexOf(card) else {
@@ -125,13 +125,13 @@ public struct Dealer: SPHCardsDebug {
     public mutating func dealFlop() -> [Card] {
         table.dealtCards = []
         table.burnt = []
-        let dealt = dealWithBurning(3)
+        let dealt = dealWithBurning(numberOfCardsToDeal: 3)
         table.addCards(dealt)
         return dealt
     }
 
     public mutating func dealTurn() -> [Card] {
-        let dealt = dealWithBurning(1)
+        let dealt = dealWithBurning(numberOfCardsToDeal: 1)
         table.addCards(dealt)
         return dealt
     }
@@ -144,13 +144,13 @@ public struct Dealer: SPHCardsDebug {
         return currentDeck.takeOneCard()
     }
 
-    private mutating func dealWithBurning(numberOfCardsToDeal: Int) -> [Card] {
+    private mutating func dealWithBurning(numberOfCardsToDeal: numberOfCardsToDeal: Int) -> [Card] {
         guard let burned = burn() else { return errorNotEnoughCards() }
-        table.addToBurntCards(burned)
+        table.addToBurntCards(card: burned)
         return deal(numberOfCardsToDeal)
     }
 
-    public mutating func evaluateHoldemHandAtRiverFor(inout player: Player) {
+    public mutating func evaluateHoldemHandAtRiverFor(player: inout Player) {
         player.holdemHand = evaluateHoldemHandAtRiver(player)
     }
 
@@ -158,7 +158,7 @@ public struct Dealer: SPHCardsDebug {
         let sevenCards = table.dealtCards + player.cards
         let cardsReps = sevenCards.map({ $0.description })
         // all 5 cards combinations from the 7 cards
-        let perms = cardsReps.permutation(5)
+        let perms = cardsReps.permutation(length: 5)
         // TODO: do the permutations with rank/else instead of literal cards descriptions
 
         let sortedPerms = perms.map { $0.sort() }
@@ -172,7 +172,7 @@ public struct Dealer: SPHCardsDebug {
 
         var handsResult = [(HandRank, [String])]()
         for hand in uniques {
-            let h = evaluator.evaluate(hand)
+            let h = evaluator.evaluate(card: hand)
             handsResult.append((h, hand))
         }
         handsResult.sortInPlace({ $0.0 < $1.0 })
@@ -180,11 +180,11 @@ public struct Dealer: SPHCardsDebug {
         return bestHand!
     }
 
-    public mutating func updateHeadsUpWinner(player1 player1: Player, player2: Player) {
+    public mutating func updateHeadsUpWinner(player1: Player, player2: Player) {
         currentHandWinner = findHeadsUpWinner(player1: player1, player2: player2)
     }
 
-    public func findHeadsUpWinner(player1 player1: Player, player2: Player) -> Player {
+    public func findHeadsUpWinner(player1: Player, player2: Player) -> Player {
         if player1.holdemHand!.0 < player2.holdemHand!.0 {
             return player1 }
         else if player1.holdemHand!.0 == player2.holdemHand!.0 {

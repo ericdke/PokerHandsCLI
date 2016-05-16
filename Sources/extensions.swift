@@ -17,7 +17,7 @@ public func ==(lhs: Card, rhs: Card) -> Bool {
     return false
 }
 
-public extension MutableCollectionType where Index == Int {
+public extension MutableCollection where Index == Int {
     
     public mutating func shuffleInPlace() {
         if count < 2 { return }
@@ -72,7 +72,7 @@ public extension SPHCardsDebug {
     
 }
 
-public extension SequenceType where Generator.Element == Card {
+public extension Sequence where Generator.Element == Card {
     
     public var descriptions: [String] {
         return self.map { $0.description }
@@ -158,7 +158,7 @@ public extension Array {
         }
     }
     // adapted from ExSwift
-    private func permutationHelper(n: Int, inout array: [Element], inout endArray: [[Element]]) -> [[Element]] {
+    private func permutationHelper(n: Int, array: inout [Element], endArray: inout [[Element]]) -> [[Element]] {
         if n == 1 {
             endArray += [array]
         }
