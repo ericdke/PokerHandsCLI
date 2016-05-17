@@ -10,11 +10,13 @@ public struct Player: CanTakeCard {
 
     public var name: String?
 
-    public var historyOfDealtHoldemCards = [(Card, Card, NSDate)]()
+    public typealias DealtHand = (Card, Card, NSDate)
+
+    public var historyOfDealtHoldemCards = [DealtHand]()
     
     public var frequentHands = [String:Int]()
 
-    public var holdemHand: (HandRank, [String])?
+    public var holdemHand: HandResult?
     
     public var holdemHandDescription: String? {
         return holdemHand?.1.joined(separator: " ")
@@ -32,9 +34,9 @@ public struct Player: CanTakeCard {
     public var cards = [Card]() {
         didSet {
             if self.cards.count > 1 {
-                let tu = (self.cards[0], self.cards[1], NSDate())
-                historyOfDealtHoldemCards.append(tu)
-                let fqname = "\(tu.0.description),\(tu.1.description)"
+                let hand: DealtHand = (self.cards[0], self.cards[1], NSDate())
+                historyOfDealtHoldemCards.append(hand)
+                let fqname = "\(hand.0.description),\(hand.1.description)"
                 if frequentHands[fqname] == nil {
                     frequentHands[fqname] = 1
                 } else {

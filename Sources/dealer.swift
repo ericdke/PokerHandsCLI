@@ -4,6 +4,8 @@
     import Glibc
 #endif
 
+public typealias HandResult = (HandRank, [String])
+
 public struct Dealer: SPHCardsDebug {
 
     public var evaluator: Evaluator
@@ -86,12 +88,12 @@ public struct Dealer: SPHCardsDebug {
         player.cards = []
     }
 
-    public mutating func deal(numberOfCards: Int) -> [Card] {
-        return currentDeck.takeCards(number: numberOfCards)
+    public mutating func deal(number: Int) -> [Card] {
+        return currentDeck.takeCards(number: number)
     }
 
     public mutating func dealHoldemHand() -> [Card] {
-        return deal(numberOfCards: 2)
+        return deal(number: 2)
     }
 
     public mutating func dealHoldemHandTo(player: inout Player) {
@@ -133,13 +135,13 @@ public struct Dealer: SPHCardsDebug {
     public mutating func dealFlop() -> [Card] {
         table.dealtCards = []
         table.burnt = []
-        let dealt = dealWithBurning(numberOfCardsToDeal: 3)
+        let dealt = dealWithBurning(number: 3)
         table.addCards(cards: dealt)
         return dealt
     }
 
     public mutating func dealTurn() -> [Card] {
-        let dealt = dealWithBurning(numberOfCardsToDeal: 1)
+        let dealt = dealWithBurning(number: 1)
         table.addCards(cards: dealt)
         return dealt
     }
@@ -152,19 +154,19 @@ public struct Dealer: SPHCardsDebug {
         return currentDeck.takeOneCard()
     }
 
-    private mutating func dealWithBurning(numberOfCardsToDeal: Int) -> [Card] {
+    private mutating func dealWithBurning(number: Int) -> [Card] {
         guard let burned = burn() else { return errorNotEnoughCards() }
         table.addToBurntCards(card: burned)
-        return deal(numberOfCards: numberOfCardsToDeal)
+        return deal(number: number)
     }
 
     public mutating func evaluateHoldemHandAtRiverFor(player: inout Player) {
         player.holdemHand = evaluateHoldemHandAtRiver(player: player)
     }
 
-    public func evaluateHoldemHandAtRiver(player: Player) -> (HandRank, [String]) {
+    public func evaluateHoldemHandAtRiver(player: Player) -> HandResult {
         let sevenCards = table.dealtCards + player.cards
-        let cardsReps = sevenCards.map({ $0.description })
+        let cardsReps = sevenCards.map { $0.description }
         // all 5 cards combinations from the 7 cards
         let perms = cardsReps.permutation(length: 5)
         // TODO: do the permutations with rank/else instead of literal cards descriptions
@@ -172,13 +174,13 @@ public struct Dealer: SPHCardsDebug {
         let sortedPerms = perms.map { $0.sorted() }
         var uniques: Array<Array<String>> = []
         sortedPerms.forEach { (a) -> () in
-            let contains = uniques.contains{ $0 == a }
+            let contains = uniques.contains { $0 == a }
             if !contains {
                 uniques.append(a)
             }
         }
 
-        var handsResult = [(HandRank, [String])]()
+        var handsResult = [HandResult]()
         for hand in uniques {
             let h = evaluator.evaluate(cards: hand)
             handsResult.append((h, hand))
@@ -194,8 +196,8 @@ public struct Dealer: SPHCardsDebug {
 
     public func findHeadsUpWinner(player1: Player, player2: Player) -> Player {
         if player1.holdemHand!.0 < player2.holdemHand!.0 {
-            return player1 }
-        else if player1.holdemHand!.0 == player2.holdemHand!.0 {
+            return player1 
+        } else if player1.holdemHand!.0 == player2.holdemHand!.0 {
             return Player(name: "SPLIT") }
         else {
             return player2
