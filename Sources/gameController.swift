@@ -42,9 +42,9 @@ class GameController {
 
 	func startGame() {
 		#if os(Linux)
-			gameLinux(loops)
+			gameLinux(loops: loops)
 		#else
-			gameOSX(loops)
+			gameOSX(loops: loops)
 		#endif
 	}
 
@@ -55,8 +55,8 @@ class GameController {
 		var dealer = Dealer(deck: Deck(), evaluator: eval)
 		for _ in 1...loops { // Can't wait for GCD in Swift.org :(
 			if gameMode == .Random {
-			    dealer.dealHoldemHandTo(&player1)
-			    dealer.dealHoldemHandTo(&player2)
+			    dealer.dealHoldemHandTo(player: &player1)
+			    dealer.dealHoldemHandTo(player: &player2)
 			}
 
 			print("\(player1Name) cards: \(player1.holeCards)")
@@ -68,8 +68,8 @@ class GameController {
 
 			print("Table cards: \(dealer.table.currentGame)")
 
-			dealer.evaluateHoldemHandAtRiverFor(&player1)
-			dealer.evaluateHoldemHandAtRiverFor(&player2)
+			dealer.evaluateHoldemHandAtRiverFor(player: &player1)
+			dealer.evaluateHoldemHandAtRiverFor(player: &player2)
 			dealer.updateHeadsUpWinner(player1: player1, player2: player2)
 
 			guard let winner = dealer.currentHandWinner else {
@@ -87,14 +87,14 @@ class GameController {
 			}
 
 			results.append((dealer, player1, player2))
-			endOfHand((dealer, player1, player2))
+			endOfHand(people: (dealer, player1, player2))
 
 			// TODO: when multithread is implemented, do not use this mutable way anymore
 			// Create new dealer and players each loop instead
 			// Or implement locks, but... no.
 			dealer.changeDeck()
-			dealer.removeCards(&player1)
-			dealer.removeCards(&player2)
+			dealer.removeCards(player: &player1)
+			dealer.removeCards(player: &player2)
 		}
 
 		print("\n\(player1Name) score: \(player1Score)") 
@@ -102,7 +102,7 @@ class GameController {
 	}
 
 	func gameOSX(loops: Int) {
-		gameLinux(loops)  // Looks like GCD is not implemented yet in Swift.org even on OS X, shadowing for now
+		gameLinux(loops: loops)  // Looks like GCD is not implemented yet in Swift.org even on OS X, shadowing for now
 
 		// let q1 = dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0)
 		// let q2 = dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)

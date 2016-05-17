@@ -51,7 +51,7 @@ public struct Card {
     
     public var fileName: String {
         get {
-            let temp = NSString(string:name).stringByReplacingOccurrencesOfString(" ", withString: "_").lowercaseString
+            let temp = NSString(string:name).replacingOccurrences(of: " ", with: "_").lowercased()
             return "\(temp)_w.png"
         }
     }

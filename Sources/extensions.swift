@@ -20,13 +20,14 @@ public func ==(lhs: Card, rhs: Card) -> Bool {
 public extension MutableCollection where Index == Int {
     
     public mutating func shuffleInPlace() {
-        if count < 2 { return }
-        for i in 0..<count - 1 {
+        let c = Int(count.toIntMax())
+        if c < 2 { return }
+        for i in 0..<c - 1 {
             let j:Int
             #if os(Linux) 
-                j = getPseudoRandomNumber(count - i) + i
+                j = getPseudoRandomNumber(c - i) + i
             #else
-                j = Int(arc4random_uniform(UInt32(count - i))) + i
+                j = Int(arc4random_uniform(UInt32(c - i))) + i
             #endif
             if i != j {
                 swap(&self[i], &self[j])
@@ -62,7 +63,7 @@ public protocol SPHCardsDebug {
 public extension SPHCardsDebug {
     
     public func errorNotEnoughCards() -> [Card] {
-        error("not enough cards")
+        error(message: "not enough cards")
         return []
     }
     
@@ -72,18 +73,18 @@ public extension SPHCardsDebug {
     
 }
 
-public extension Sequence where Generator.Element == Card {
+public extension Sequence where Iterator.Element == Card {
     
     public var descriptions: [String] {
         return self.map { $0.description }
     }
     
     public var spacedDescriptions: String {
-        return self.descriptions.joinWithSeparator(" ")
+        return self.descriptions.joined(separator: " ")
     }
     
     public func indexOf(card: Card) -> Int? {
-        for (index, deckCard) in self.enumerate() {
+        for (index, deckCard) in self.enumerated() {
             if deckCard == card {
                 return index
             }
@@ -92,12 +93,12 @@ public extension Sequence where Generator.Element == Card {
     }
     
     public func joinNames(with string: String) -> String {
-        return self.map({ $0.name }).joinWithSeparator(string)
+        return self.map({ $0.name }).joined(separator: string)
     }
     
 }
 
-public extension Range {
+public extension CountableRange {
     
     public var array: [Element] {
         return self.map { $0 }
@@ -115,7 +116,7 @@ public extension Int {
         }
     }
     
-    public func times(@autoclosure f: () -> ()) {
+    public func times(f: @autoclosure () -> ()) {
         if self > 0 {
             for _ in 0..<self {
                 f()
@@ -136,7 +137,7 @@ public extension Array {
             index = Int(arc4random_uniform(UInt32(self.count)))
         #endif
         let item = self[index]
-        self.removeAtIndex(index)
+        self.remove(at: index)
         return item
     }
     
@@ -148,11 +149,11 @@ public extension Array {
             return [[]]
         } else {
             var permutations: [[Element]] = []
-            let combinations = combination(length)
+            let combinations = combination(length: length)
             for combination in combinations {
                 var endArray: [[Element]] = []
                 var mutableCombination = combination
-                permutations += self.permutationHelper(length, array: &mutableCombination, endArray: &endArray)
+                permutations += self.permutationHelper(n: length, array: &mutableCombination, endArray: &endArray)
             }
             return permutations
         }
@@ -162,8 +163,8 @@ public extension Array {
         if n == 1 {
             endArray += [array]
         }
-        for var i = 0; i < n; i++ {
-            permutationHelper(n - 1, array: &array, endArray: &endArray)
+        for i in 0..<n {
+            permutationHelper(n: n - 1, array: &array, endArray: &endArray)
             let j = n % 2 == 0 ? i : 0;
             let temp: Element = array[j]
             array[j] = array[n - 1]
@@ -187,12 +188,12 @@ public extension Array {
             combinations.append(combination)
             var i = indexes.count - 1
             while i >= 0 && indexes[i] == i + offset {
-                i--
+                i -= 1
             }
             if i < 0 {
                 break
             }
-            i++
+            i += 1
             let start = indexes[i-1] + 1
             for j in (i-1)..<indexes.count {
                 indexes[j] = start + j - i + 1

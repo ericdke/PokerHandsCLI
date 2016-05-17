@@ -95,28 +95,28 @@ public struct Dealer: SPHCardsDebug {
         var cardsToDeal = [Card]()
         for cardChars in upCardChars {
             let cardObj = Card(suit: cardChars[1], rank: cardChars[0])
-            guard let indexToRemove = currentDeck.cards.indexOf(cardObj) else {
+            guard let indexToRemove = currentDeck.cards.indexOf(card: cardObj) else {
                 print("ERROR: \(cardObj) is not in the deck")
                 break
             }
-            currentDeck.cards.removeAtIndex(indexToRemove)
+            currentDeck.cards.remove(at: indexToRemove)
             cardsToDeal.append(cardObj)
         }
         return cardsToDeal
     }
     
     public mutating func dealHoldemCardsTo(player: inout Player, cards: [String]) {
-        player.cards = dealHoldemCards(cards)
+        player.cards = dealHoldemCards(cards: cards)
     }
     
     public mutating func dealHoldemCardsTo(player: inout Player, cards: [Card]) {
         var cardsToDeal = [Card]()
         for card in cards {
-            guard let indexToRemove = currentDeck.cards.indexOf(card) else {
+            guard let indexToRemove = currentDeck.cards.indexOf(card: card) else {
                 print("ERROR: \(card) is not in the deck")
                 break
             }
-            currentDeck.cards.removeAtIndex(indexToRemove)
+            currentDeck.cards.remove(at: indexToRemove)
             cardsToDeal.append(card)
         }
         player.cards = cardsToDeal
@@ -126,13 +126,13 @@ public struct Dealer: SPHCardsDebug {
         table.dealtCards = []
         table.burnt = []
         let dealt = dealWithBurning(numberOfCardsToDeal: 3)
-        table.addCards(dealt)
+        table.addCards(cards: dealt)
         return dealt
     }
 
     public mutating func dealTurn() -> [Card] {
         let dealt = dealWithBurning(numberOfCardsToDeal: 1)
-        table.addCards(dealt)
+        table.addCards(cards: dealt)
         return dealt
     }
 
@@ -144,14 +144,14 @@ public struct Dealer: SPHCardsDebug {
         return currentDeck.takeOneCard()
     }
 
-    private mutating func dealWithBurning(numberOfCardsToDeal: numberOfCardsToDeal: Int) -> [Card] {
+    private mutating func dealWithBurning(numberOfCardsToDeal: Int) -> [Card] {
         guard let burned = burn() else { return errorNotEnoughCards() }
         table.addToBurntCards(card: burned)
-        return deal(numberOfCardsToDeal)
+        return deal(numberOfCards: numberOfCardsToDeal)
     }
 
     public mutating func evaluateHoldemHandAtRiverFor(player: inout Player) {
-        player.holdemHand = evaluateHoldemHandAtRiver(player)
+        player.holdemHand = evaluateHoldemHandAtRiver(player: player)
     }
 
     public func evaluateHoldemHandAtRiver(player: Player) -> (HandRank, [String]) {
@@ -161,7 +161,7 @@ public struct Dealer: SPHCardsDebug {
         let perms = cardsReps.permutation(length: 5)
         // TODO: do the permutations with rank/else instead of literal cards descriptions
 
-        let sortedPerms = perms.map { $0.sort() }
+        let sortedPerms = perms.map { $0.sorted() }
         var uniques: Array<Array<String>> = []
         sortedPerms.forEach { (a) -> () in
             let contains = uniques.contains{ $0 == a }
@@ -172,10 +172,10 @@ public struct Dealer: SPHCardsDebug {
 
         var handsResult = [(HandRank, [String])]()
         for hand in uniques {
-            let h = evaluator.evaluate(card: hand)
+            let h = evaluator.evaluate(cards: hand)
             handsResult.append((h, hand))
         }
-        handsResult.sortInPlace({ $0.0 < $1.0 })
+        handsResult.sort(isOrderedBefore: { $0.0 < $1.0 })
         let bestHand = handsResult.first
         return bestHand!
     }

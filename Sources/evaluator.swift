@@ -41,7 +41,7 @@ final public class CardsDeck {
         }
     }
 
-    public func as_binary(card:String) -> Int {
+    public func as_binary(card: String) -> Int {
         return cards[card]!
     }
 }
@@ -75,7 +75,7 @@ final public class HandRank: Equatable {
     let name:RankName
     init(rank:Int) {
         self.rank = rank
-        let start = Array(rankStarts.keys.filter {$0 >= rank}).sort { $0 < $1 }.first!
+        let start = Array(rankStarts.keys.filter {$0 >= rank}).sorted { $0 < $1 }.first!
         self.name = rankStarts[start]!
     }
 }
@@ -92,8 +92,8 @@ final public class Evaluator {
     
     public let deck = CardsDeck()
     
-    public func evaluate(cards:[String]) -> HandRank {
-        let cardValues = cards.map { self.deck.as_binary($0) }
+    public func evaluate(cards: [String]) -> HandRank {
+        let cardValues = cards.map { self.deck.as_binary(card: $0) }
 
         let handIndex = cardValues.reduce(0,combine:|) >> 16
 
@@ -112,7 +112,7 @@ final public class Evaluator {
 
         let primeProduct = cardValues.map { $0 & 0xFF }.reduce(1, combine:*)
 
-        let combination = primeProductToCombination.indexOf(primeProduct)!
+        let combination = primeProductToCombination.index(of: primeProduct)!
         return HandRank(rank: combinationToRank[combination])
     }
 }

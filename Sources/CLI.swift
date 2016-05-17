@@ -4,7 +4,7 @@
     import Glibc
 #endif
 
-enum Errors: ErrorType {
+enum Errors: ErrorProtocol {
 	case NoCommand
 	case InvalidCommand
 	case NoArguments

@@ -17,16 +17,16 @@ public struct Player: CanTakeCard {
     public var holdemHand: (HandRank, [String])?
     
     public var holdemHandDescription: String? {
-        return holdemHand?.1.joinWithSeparator(" ")
+        return holdemHand?.1.joined(separator: " ")
     }
     
     public var holdemHandNameDescription: String? {
-        return holdemHand?.0.name.rawValue.lowercaseString
+        return holdemHand?.0.name.rawValue.lowercased()
     }
 
     public var cardsHistory: String {
         let mapped = historyOfDealtHoldemCards.map { $0.0.description + " " + $0.1.description }
-        return mapped.joinWithSeparator(", ")
+        return mapped.joined(separator: ", ")
     }
 
     public var cards = [Card]() {
@@ -38,7 +38,7 @@ public struct Player: CanTakeCard {
                 if frequentHands[fqname] == nil {
                     frequentHands[fqname] = 1
                 } else {
-                    frequentHands[fqname]!++
+                    frequentHands[fqname]! += 1
                 }
             }
         }
@@ -54,7 +54,7 @@ public struct Player: CanTakeCard {
         guard let date = historyOfDealtHoldemCards.last?.2 else { return nil }
         let formatter = NSDateFormatter()
         formatter.dateFormat = "yyyy/MM/dd HH:mm:ss:SSS"
-        return formatter.stringFromDate(date)
+        return formatter.string(from: date)
     }
     
     public var lastDealtHandDate: NSDate? {
