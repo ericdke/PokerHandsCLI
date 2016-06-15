@@ -5,11 +5,11 @@
 #endif
 
 enum Errors: ErrorProtocol {
-	case NoCommand
-	case InvalidCommand
-	case NoArguments
-	case InvalidArguments
-	case UnknownError
+	case noCommand
+	case invalidCommand
+	case noArguments
+	case invalidArguments
+	case unknownError
 }
 
 enum Warnings: String {
@@ -38,7 +38,7 @@ class CLI {
 
 	func startGame() throws {
 		guard sourceFile != nil else {
-			throw Errors.UnknownError
+			throw Errors.unknownError
 		}
 		// WIP
 		if let c = command {
@@ -48,13 +48,13 @@ class CLI {
 					help()
 				}
 				guard let num = Int(input[0]) else {
-					throw Errors.InvalidArguments
+					throw Errors.invalidArguments
 				}
 				game.loops = num
 			case "-h", "--help":
 				help()
 			default:
-				throw Errors.InvalidCommand
+				throw Errors.invalidCommand
 			}
 		}
 		print("\n\nLaunching \(game.loops) all-in hands.\n\n")

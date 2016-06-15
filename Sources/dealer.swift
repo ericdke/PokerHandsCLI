@@ -1,4 +1,4 @@
-#if os(OSX) 
+#if os(OSX)
     import Foundation
 #else 
     import Glibc
@@ -105,7 +105,7 @@ public struct Dealer: SPHCardsDebug {
         var cardsToDeal = [Card]()
         for cardChars in upCardChars {
             let cardObj = Card(suit: cardChars[1], rank: cardChars[0])
-            guard let indexToRemove = currentDeck.cards.indexOf(card: cardObj) else {
+            guard let indexToRemove = currentDeck.cards.indexOf(cardObj) else {
                 print("ERROR: \(cardObj) is not in the deck")
                 break
             }
@@ -122,7 +122,7 @@ public struct Dealer: SPHCardsDebug {
     public mutating func dealHoldemCardsTo(player: inout Player, cards: [Card]) {
         var cardsToDeal = [Card]()
         for card in cards {
-            guard let indexToRemove = currentDeck.cards.indexOf(card: card) else {
+            guard let indexToRemove = currentDeck.cards.indexOf(card) else {
                 print("ERROR: \(card) is not in the deck")
                 break
             }
@@ -168,7 +168,7 @@ public struct Dealer: SPHCardsDebug {
         let sevenCards = table.dealtCards + player.cards
         let cardsReps = sevenCards.map { $0.description }
         // all 5 cards combinations from the 7 cards
-        let perms = cardsReps.permutation(length: 5)
+        let perms = cardsReps.permutation(5)
         // TODO: do the permutations with rank/else instead of literal cards descriptions
 
         let sortedPerms = perms.map { $0.sorted() }

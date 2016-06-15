@@ -4,12 +4,6 @@
     import Foundation
 #endif
 
-// TODO: find a way to generate a GOOD random number without killing the CPU
-// This function is very *pseudo* random. Bleh.
-func getPseudoRandomNumber(max:Int) -> Int {
-    return Int(random() % max)
-}
-
 public func ==(lhs: Card, rhs: Card) -> Bool {
     if lhs.rank == rhs.rank && lhs.suit == rhs.suit {
         return true
@@ -24,8 +18,9 @@ public extension MutableCollection where Index == Int {
         if c < 2 { return }
         for i in 0..<c - 1 {
             let j:Int
-            #if os(Linux) 
-                j = getPseudoRandomNumber(c - i) + i
+            #if os(Linux)
+                j = Int(random() % c - i) + i
+//                j = getPseudoRandomNumber(c - i) + i
             #else
                 j = Int(arc4random_uniform(UInt32(c - i))) + i
             #endif
@@ -56,18 +51,18 @@ public extension CanTakeCard {
 public protocol SPHCardsDebug {
     
     func errorNotEnoughCards() -> [Card]
-    func error(message: String)
+    func error(_ message: String)
     
 }
 
 public extension SPHCardsDebug {
     
     public func errorNotEnoughCards() -> [Card] {
-        error(message: "not enough cards")
+        error("not enough cards")
         return []
     }
     
-    public func error(message: String) {
+    public func error(_ message: String) {
         print("ERROR: \(message)")
     }
     
@@ -83,7 +78,7 @@ public extension Sequence where Iterator.Element == Card {
         return self.descriptions.joined(separator: " ")
     }
     
-    public func indexOf(card: Card) -> Int? {
+    public func indexOf(_ card: Card) -> Int? {
         for (index, deckCard) in self.enumerated() {
             if deckCard == card {
                 return index
@@ -108,7 +103,7 @@ public extension CountableRange {
 
 public extension Int {
     
-    public func times(f: () -> ()) {
+    public func times(_ f: () -> ()) {
         if self > 0 {
             for _ in 0..<self {
                 f()
@@ -116,7 +111,7 @@ public extension Int {
         }
     }
     
-    public func times(f: @autoclosure () -> ()) {
+    public func times(_ f: @autoclosure () -> ()) {
         if self > 0 {
             for _ in 0..<self {
                 f()
@@ -142,29 +137,29 @@ public extension Array {
     }
     
     // adapted from ExSwift
-    public func permutation(length: Int) -> [[Element]] {
+    public func permutation(_ length: Int) -> [[Element]] {
         if length < 0 || length > self.count {
             return []
         } else if length == 0 {
             return [[]]
         } else {
             var permutations: [[Element]] = []
-            let combinations = combination(length: length)
+            let combinations = combination(length)
             for combination in combinations {
                 var endArray: [[Element]] = []
                 var mutableCombination = combination
-                permutations += self.permutationHelper(n: length, array: &mutableCombination, endArray: &endArray)
+                permutations += self.permutationHelper(length, array: &mutableCombination, endArray: &endArray)
             }
             return permutations
         }
     }
     // adapted from ExSwift
-    private func permutationHelper(n: Int, array: inout [Element], endArray: inout [[Element]]) -> [[Element]] {
+    private func permutationHelper(_ n: Int, array: inout [Element], endArray: inout [[Element]]) -> [[Element]] {
         if n == 1 {
             endArray += [array]
         }
         for i in 0..<n {
-            permutationHelper(n: n - 1, array: &array, endArray: &endArray)
+            _ = permutationHelper(n - 1, array: &array, endArray: &endArray)
             let j = n % 2 == 0 ? i : 0;
             let temp: Element = array[j]
             array[j] = array[n - 1]
@@ -173,7 +168,7 @@ public extension Array {
         return endArray
     }
     // adapted from ExSwift
-    public func combination(length: Int) -> [[Element]] {
+    public func combination(_ length: Int) -> [[Element]] {
         if length < 0 || length > self.count {
             return []
         }

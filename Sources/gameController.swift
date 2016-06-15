@@ -5,11 +5,11 @@
 class GameController {
 
 	enum GameMode {
-	    case Random, Custom
+	    case random, custom
 	}
 
 	enum PersonType {
-	    case Player1, Player2, Dealer
+	    case player1, player2, dealer
 	}
 
 	typealias DealerAndPlayers = (dealer: Dealer, player1: Player, player2: Player)
@@ -30,11 +30,11 @@ class GameController {
 
 	private let eval = Evaluator()
 
-	init(mode: GameMode = .Random) {
+	init(mode: GameMode = .random) {
 		self.gameMode = mode
 	}
 
-	init(player1Name: String, player2Name: String, mode: GameMode = .Random) {
+	init(player1Name: String, player2Name: String, mode: GameMode = .random) {
 		self.player1Name = player1Name
 		self.player2Name = player2Name
 		self.gameMode = mode
@@ -54,7 +54,7 @@ class GameController {
 		var player2 = Player(name: player2Name)
 		var dealer = Dealer(deck: Deck(), evaluator: eval)
 		for _ in 1...loops { // Can't wait for GCD in Swift.org :(
-			if gameMode == .Random {
+			if gameMode == .random {
 			    dealer.dealHoldemHandTo(player: &player1)
 			    dealer.dealHoldemHandTo(player: &player2)
 			}
@@ -62,9 +62,9 @@ class GameController {
 			print("\(player1Name) cards: \(player1.holeCards)")
 			print("\(player2Name) cards: \(player2.holeCards)")
 			
-			dealer.dealFlop()
-			dealer.dealTurn()
-			dealer.dealRiver()
+			_ = dealer.dealFlop()
+			_ = dealer.dealTurn()
+			_ = dealer.dealRiver()
 
 			print("Table cards: \(dealer.table.currentGame)")
 

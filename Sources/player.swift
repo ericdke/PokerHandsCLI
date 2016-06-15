@@ -10,7 +10,7 @@ public struct Player: CanTakeCard {
 
     public var name: String?
 
-    public typealias DealtHand = (Card, Card, NSDate)
+    public typealias DealtHand = (Card, Card, Date)
 
     public var historyOfDealtHoldemCards = [DealtHand]()
     
@@ -34,7 +34,7 @@ public struct Player: CanTakeCard {
     public var cards = [Card]() {
         didSet {
             if self.cards.count > 1 {
-                let hand: DealtHand = (self.cards[0], self.cards[1], NSDate())
+                let hand: DealtHand = (self.cards[0], self.cards[1], Date())
                 historyOfDealtHoldemCards.append(hand)
                 let fqname = "\(hand.0.description),\(hand.1.description)"
                 if frequentHands[fqname] == nil {
@@ -54,12 +54,12 @@ public struct Player: CanTakeCard {
     
     public var lastDealtHandReadableDate: String? {
         guard let date = historyOfDealtHoldemCards.last?.2 else { return nil }
-        let formatter = NSDateFormatter()
+        let formatter = DateFormatter()
         formatter.dateFormat = "yyyy/MM/dd HH:mm:ss:SSS"
         return formatter.string(from: date)
     }
     
-    public var lastDealtHandDate: NSDate? {
+    public var lastDealtHandDate: Date? {
         return historyOfDealtHoldemCards.last?.2
     }
 }
