@@ -24,13 +24,13 @@ public struct Deck: CanTakeCard, SPHCardsDebug {
             return errorNotEnoughCards()
         }
         var c = [Card]()
-        number.times {
+        for _ in 1...number {
             c.append(self.cards.takeOne())
         }
         return c
     }
 
-    public var count: Int { get { return cards.count } }
+    public var count: Int { return cards.count }
 
-    public var dealt: Int { get { return capacity - cards.count } }
+    public var dealt: Int { return capacity - cards.count }
 }
