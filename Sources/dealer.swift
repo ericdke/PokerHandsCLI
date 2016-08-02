@@ -185,7 +185,7 @@ public struct Dealer: SPHCardsDebug {
             let h = evaluator.evaluate(cards: hand)
             handsResult.append((h, hand))
         }
-        handsResult.sort(isOrderedBefore: { $0.0 < $1.0 })
+        handsResult.sort(by: { $0.0 < $1.0 })
         let bestHand = handsResult.first
         return bestHand!
     }
