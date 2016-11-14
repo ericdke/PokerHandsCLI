@@ -11,6 +11,10 @@ public func ==(lhs: Card, rhs: Card) -> Bool {
     return false
 }
 
+public func getPseudoRandomNumber(_ max: Int) -> Int {
+    return Int(random() % max)
+}
+
 public extension MutableCollection where Index == Int {
     
     public mutating func shuffleInPlace() {
@@ -19,8 +23,8 @@ public extension MutableCollection where Index == Int {
         for i in 0..<c - 1 {
             let j:Int
             #if os(Linux)
-                j = Int(random() % c - i) + i
-//                j = getPseudoRandomNumber(c - i) + i
+                //j = Int(random() % c - i) + i
+                j = getPseudoRandomNumber(c - i) + i
             #else
                 j = Int(arc4random_uniform(UInt32(c - i))) + i
             #endif
@@ -29,7 +33,7 @@ public extension MutableCollection where Index == Int {
             }
         }
     }
-    
+
 }
 
 public protocol CanTakeCard {

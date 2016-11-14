@@ -24,7 +24,7 @@ class CLI {
 	var input: [String] = []
 
 	init() {
-		let args = ProcessInfo().arguments
+		let args = CommandLine.arguments
 		self.sourceFile = args[0]
 		if args.count > 1 {
 			self.command = args[1]
