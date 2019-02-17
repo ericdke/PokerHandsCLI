@@ -101,7 +101,7 @@ public struct Dealer: SPHCardsDebug {
     }
     
     public mutating func dealHoldemCards(cards: [String]) -> [Card] {
-        let upCardChars = cards.map({$0.uppercased().characters.map({String($0)})})
+        let upCardChars = cards.map({$0.uppercased().map({String($0)})})
         var cardsToDeal = [Card]()
         for cardChars in upCardChars {
             let cardObj = Card(suit: cardChars[1], rank: cardChars[0])

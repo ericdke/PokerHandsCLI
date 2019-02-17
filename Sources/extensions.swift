@@ -17,8 +17,8 @@ public func getPseudoRandomNumber(_ max: Int) -> Int {
 
 public extension MutableCollection where Index == Int {
     
-    public mutating func shuffleInPlace() {
-        let c = Int(count.toIntMax())
+    mutating func shuffleInPlace() {
+        let c = Int(count)
         if c < 2 { return }
         for i in 0..<c - 1 {
             let j:Int
@@ -29,7 +29,7 @@ public extension MutableCollection where Index == Int {
                 j = Int(arc4random_uniform(UInt32(c - i))) + i
             #endif
             if i != j {
-                swap(&self[i], &self[j])
+                swapAt(i, j)
             }
         }
     }
@@ -45,7 +45,7 @@ public protocol CanTakeCard {
 
 public extension CanTakeCard {
     
-    public mutating func takeOneCard() -> Card? {
+    mutating func takeOneCard() -> Card? {
         guard cards.count > 0 else { return nil }
         return cards.takeOne()
     }
@@ -61,12 +61,12 @@ public protocol SPHCardsDebug {
 
 public extension SPHCardsDebug {
     
-    public func errorNotEnoughCards() -> [Card] {
+    func errorNotEnoughCards() -> [Card] {
         error("not enough cards")
         return []
     }
     
-    public func error(_ message: String) {
+    func error(_ message: String) {
         print("ERROR: \(message)")
     }
     
@@ -74,15 +74,15 @@ public extension SPHCardsDebug {
 
 public extension Sequence where Iterator.Element == Card {
     
-    public var descriptions: [String] {
+    var descriptions: [String] {
         return self.map { $0.description }
     }
     
-    public var spacedDescriptions: String {
+    var spacedDescriptions: String {
         return self.descriptions.joined(separator: " ")
     }
     
-    public func indexOf(_ card: Card) -> Int? {
+    func indexOf(_ card: Card) -> Int? {
         for (index, deckCard) in self.enumerated() {
             if deckCard == card {
                 return index
@@ -91,7 +91,7 @@ public extension Sequence where Iterator.Element == Card {
         return nil
     }
     
-    public func joinNames(with string: String) -> String {
+    func joinNames(with string: String) -> String {
         return self.map({ $0.name }).joined(separator: string)
     }
     
@@ -99,7 +99,7 @@ public extension Sequence where Iterator.Element == Card {
 
 public extension CountableRange {
     
-    public var array: [Element] {
+    var array: [Element] {
         return self.map { $0 }
     }
     
@@ -107,7 +107,7 @@ public extension CountableRange {
 
 public extension Array {
     
-    public mutating func takeOne() -> Element {
+    mutating func takeOne() -> Element {
         let index:Int
         #if os(Linux) 
             // TODO: find a better way
@@ -121,7 +121,7 @@ public extension Array {
     }
     
     // adapted from ExSwift
-    public func permutation(_ length: Int) -> [[Element]] {
+    func permutation(_ length: Int) -> [[Element]] {
         if length < 0 || length > self.count {
             return []
         } else if length == 0 {
@@ -152,7 +152,7 @@ public extension Array {
         return endArray
     }
     // adapted from ExSwift
-    public func combination(_ length: Int) -> [[Element]] {
+    func combination(_ length: Int) -> [[Element]] {
         if length < 0 || length > self.count {
             return []
         }

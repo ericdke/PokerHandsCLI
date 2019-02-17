@@ -112,7 +112,7 @@ final public class Evaluator {
 
         let primeProduct = cardValues.map { $0 & 0xFF }.reduce(1, *)
 
-        let combination = primeProductToCombination.index(of: primeProduct)!
+        let combination = primeProductToCombination.firstIndex(of: primeProduct)!
         return HandRank(rank: combinationToRank[combination])
     }
 }
